@@ -2,6 +2,7 @@ package com.example.Hoteles.controller;
 
 import com.example.Hoteles.model.Hotel;
 import com.example.Hoteles.service.HotelService;
+import com.example.Hoteles.service.HotelServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 @RequestMapping("/hoteles")
 public class HotelController {
     private final HotelService hotelService;
+    private final HotelServiceImpl hotelServiceImpl;
 
-    public HotelController(HotelService hotelService) {
+    public HotelController(HotelService hotelService, HotelServiceImpl hotelServiceImpl) {
         this.hotelService = hotelService;
+        this.hotelServiceImpl = hotelServiceImpl;
     }
 
     @GetMapping
@@ -34,4 +37,10 @@ public class HotelController {
     public Hotel addHotel(@RequestBody Hotel hotel) {
         return hotelService.addHotel(hotel);
     }
+
+    @PutMapping("/{id}/disponibilidad")
+    public void actualizarDisponibilidad(@PathVariable Long id, @RequestParam boolean disponible) {
+        hotelServiceImpl.actualizarDisponibilidad(id, disponible);
+    }
+
 }

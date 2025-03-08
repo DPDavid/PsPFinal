@@ -32,4 +32,11 @@ public class HotelServiceImpl implements HotelService {
     public List<Hotel> getAvailableHotels() {
         return hotelRepository.findByAvailable(true);
     }
+
+    public void actualizarDisponibilidad(Long id, boolean disponible) {
+        Hotel hotel = hotelRepository.findById(id).orElseThrow(() -> new RuntimeException("Hotel no encontrado"));
+        hotel.setAvailable(disponible);
+        hotelRepository.save(hotel);
+    }
+
 }
