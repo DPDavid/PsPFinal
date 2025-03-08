@@ -18,11 +18,11 @@ public class ReservasController {
     @Autowired
     private ReservasRepository reservasRepository;
 
-    // Endpoint para crear la reserva (ya lo tienes)
+    // Endpoint para crear la reserva
     @PostMapping
-    public String crearReserva(@RequestBody Reservas reserva, @RequestParam int personas) {
+    public String crearReserva(@RequestBody Reservas reserva) {  // No necesitamos @RequestParam aquí
         try {
-            reservasService.realizarReserva(reserva, personas);
+            reservasService.realizarReserva(reserva, reserva.getPersonas());  // Pasa personas desde el objeto reserva
             return "Reserva creada con éxito";
         } catch (Exception e) {
             return "Error al crear reserva: " + e.getMessage();
@@ -32,6 +32,7 @@ public class ReservasController {
     // Endpoint para obtener todas las reservas
     @GetMapping
     public List<Reservas> obtenerReservas() {
-        return reservasRepository.findAll();  // Devuelve todas las reservas de la base de datos
+        return reservasRepository.findAll();
     }
 }
+

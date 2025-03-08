@@ -29,6 +29,7 @@ public class VueloController {
 
     @PostMapping
     public ResponseEntity<String> crearVuelo(@RequestBody Vuelos vuelo) {
+        vueloService.guardarVuelo(vuelo);  // Agrega esta línea
         return ResponseEntity.status(HttpStatus.CREATED).body("Vuelo creado con éxito");
     }
 

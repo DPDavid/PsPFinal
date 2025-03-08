@@ -30,4 +30,9 @@ public class VueloServiceImpl implements VueloService {
     public List<Vuelos> obtenerVuelosDisponibles() {
         return vueloRepository.findAll();
     }
+
+    @Override
+    public void guardarVuelo(Vuelos vuelo) {
+        vueloRepository.save(vuelo);
+    }
 }

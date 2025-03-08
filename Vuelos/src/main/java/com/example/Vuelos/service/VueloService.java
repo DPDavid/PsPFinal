@@ -7,4 +7,5 @@ import java.util.List;
 public interface VueloService {
     void actualizarPlazas(Long idVuelo, int totalPersonas);
     List<Vuelos> obtenerVuelosDisponibles();
+    void guardarVuelo(Vuelos vuelo);
 }

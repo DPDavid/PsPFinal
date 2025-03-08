@@ -17,6 +17,7 @@ public class Reservas {
     private String dni;
     private int vuelo;
     private int hotel;
+    private int personas;
 
     public long getHotelId() {
         return this.hotel;
