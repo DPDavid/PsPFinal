@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "vuelos", url = "http://localhost:8003")
 public interface VuelosClient {
+
+    //Mapeo de la petición al servicio de vuelos
     @PutMapping("/vuelos/{id}/{personas}")
     void actualizarPlazas(@PathVariable("id") int vueloId, @PathVariable("personas") int totalPersonas);
 }

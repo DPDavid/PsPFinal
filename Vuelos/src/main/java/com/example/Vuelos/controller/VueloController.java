@@ -16,7 +16,7 @@ public class VueloController {
     @Autowired
     private VueloService vueloService;
 
-    // Endpoint para actualizar las plazas disponibles
+    //Endpoint para actualizar las plazas disponibles del vuelo
     @PutMapping("/{id}/{personas}")
     public String actualizarPlazas(@PathVariable("id") Long id, @PathVariable("personas") int personas) {
         try {
@@ -27,13 +27,14 @@ public class VueloController {
         }
     }
 
+    //Endpoint para crear un nuevo vuelo
     @PostMapping
     public ResponseEntity<String> crearVuelo(@RequestBody Vuelos vuelo) {
-        vueloService.guardarVuelo(vuelo);  // Agrega esta línea
+        vueloService.guardarVuelo(vuelo);
         return ResponseEntity.status(HttpStatus.CREATED).body("Vuelo creado con éxito");
     }
 
-    // Endpoint para obtener los vuelos disponibles
+    //Endpoint para obtener la lista de vuelos
     @GetMapping
     public List<Vuelos> obtenerVuelos() {
         return vueloService.obtenerVuelosDisponibles();

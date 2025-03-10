@@ -7,5 +7,6 @@ import java.util.List;
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
+    //Consulta para encontrar hoteles disponibles
     List<Hotel> findByAvailable(boolean available);
 }

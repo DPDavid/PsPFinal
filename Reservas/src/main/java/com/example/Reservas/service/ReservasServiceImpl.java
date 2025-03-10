@@ -27,16 +27,15 @@ public class ReservasServiceImpl implements ReservasService {
     @Override
     @Transactional
     public void realizarReserva(Reservas reserva, int totalPersonas) {
-        // Configuración del Circuit Breaker para servicio de vuelos
+        //Configuración del Circuit Breaker para servicio de vuelos
         circuitBreakerFactory.create("vuelosService").run(() -> {
             vuelosClient.actualizarPlazas(reserva.getVuelo(), totalPersonas);
             return null;
         }, throwable -> fallbackReserva());
 
+        //Guarda las reservas en la BD y actualiza la disponibilidad
         reservasRepository.save(reserva);
-
-        // Llamar a Hoteles para actualizar la disponibilidad usando el ID del hotel
-        hotelClient.actualizarDisponibilidad(reserva.getHotelId(), false);  // Usar getHotelId() en lugar de getHotel()
+        hotelClient.actualizarDisponibilidad(reserva.getHotelId(), false);
     }
 
     private Void fallbackReserva() {
